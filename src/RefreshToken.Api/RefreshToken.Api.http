@@ -1,0 +1,6 @@
+@RefreshToken.Api_HostAddress = http://localhost:5279
+
+GET {{RefreshToken.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
