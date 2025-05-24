@@ -17,10 +17,17 @@ namespace RefreshToken.Api.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost("")]
-        public async Task<IActionResult> Index(AccountCreateRequestModel model)
+        /// <summary>
+        /// Registers a new user in the system.
+        /// </summary>
+        /// <param name="model">The user registration details including email and password.</param>
+        /// <returns>An HTTP 200 OK response if registration is successful, otherwise a BadRequest with errors.</returns>
+        /// <response code="200">User registered successfully.</response>
+        /// <response code="400">Registration failed due to validation errors or other issues.</response>
+        [HttpPost("register")] // Changed route from "" to "register"
+        public async Task<IActionResult> RegisterUser(AccountCreateRequestModel model) // Renamed Index to RegisterUser
         {
-            _logger.LogInformation("Account endpoint accessed.");
+            _logger.LogInformation("User registration endpoint accessed."); // Updated log message
 
             var user = new IdentityUser
             {
@@ -34,7 +41,7 @@ namespace RefreshToken.Api.Controllers
             if (!result.Succeeded)
                 return BadRequest(result.Errors);
 
-            return Ok("Success\nThis is an account endpoint.\nYou are authorized to access it.");
+            return Ok("User registered successfully."); // Simplified success message
         }
     }
 }
